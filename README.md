@@ -37,6 +37,11 @@ A quick guide of how to install and use Juumla.
 
 <br><br>
 
+### 📚 To-Do
+- [] Vulnerability Scanner
+- [] Increase Joomla detection
+- [] Config files detection
+
 ### 🔨 Contributing
 
 A quick guide of how to contribute with the project.
