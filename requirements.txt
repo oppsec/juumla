@@ -1,0 +1,3 @@
+rich==9.10.0
+requests==2.22.0
+xmltodict==0.12.0
