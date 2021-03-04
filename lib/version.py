@@ -23,7 +23,8 @@ def get_joomla_version_1(args):
 
             print(f"[green][INF] Joomla version found: {joomla_version}\n")
         else:
-            return print(f'\n[red][ERR] Joomla version not found... [/]')
+            print(f'\n[red][ERR] Joomla version not found on first check... [/]')
+            get_joomla_version_2(args)
 
     except requests.exceptions.ConnectionError:
         return print(f'\n[red][ERR] Connection problems with {manifest_path}[/]')
@@ -43,9 +44,9 @@ def get_joomla_version_2(args):
             data = xmltodict.parse(response.content)
             joomla_version = data["metafile"]["version"]
 
-            print(f"[green][INF] Joomla version found: {joomla_version}\n")
+            print(f"[green][INF] Joomla version found: {joomla_version} on second check\n")
         else:
-            return print(f'\n[red][ERR] Joomla version not found... [/]')
+            return print(f'\n[red][ERR] Joomla version not found on second check... [/]')
             
     except requests.exceptions.ConnectionError:
         return print(f'\n[red][ERR] Connection problems with {language_path}[/]')

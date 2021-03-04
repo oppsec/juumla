@@ -31,7 +31,7 @@ def joomla_check_1(args):
     admin_text = "Joomla!"
 
     try:
-        admin_request = requests.get(admin_path, verify=False, timeout=10, allow_redirects=False)
+        admin_request = requests.get(admin_path, verify=False, timeout=10, allow_redirects=True)
         body = admin_request.text
         status_code = admin_request.status_code
 
@@ -81,5 +81,5 @@ def joomla_check_3(args):
         else:
             return print(f'[red][ERR] Joomla has not found, stopping... [/]')  
 
-    except requests.exceptions.ConnectionError as e:
+    except requests.exceptions.ConnectionError:
         return print(f'[red][ERR] Connection problems with {args.u}[/]')   
