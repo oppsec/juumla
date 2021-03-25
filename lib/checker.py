@@ -22,8 +22,8 @@ def connection_check(args):
         else:
             return print(f'[red][ERR] Connection problems with {args.u} | {status_code} [/]')
 
-    except requests.exceptions.ConnectionError:
-        return print(f'[red][ERR] Connection problems with {args.u}/]')
+    except requests.exceptions.ConnectionError as e:
+        return print(f'[red][ERR] Connection problems with {args.u} | {e} [/]')
 
     except requests.exceptions.MissingSchema:
         return print(f'[red][ERR] Invalid URL, please use http or https before the URL.')
