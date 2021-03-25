@@ -39,9 +39,10 @@ def get_joomla_version_2(args):
 
     try:
         response = requests.get(language_path, verify=False, timeout=10, allow_redirects=False)
+        headers = response.headers
         status_code = response.status_code
 
-        if(status_code == 200):
+        if(status_code == 200 and 'application/xml' in headers):
             data = xmltodict.parse(response.content)
             joomla_version = data["metafile"]["version"]
 
