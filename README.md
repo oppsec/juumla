@@ -19,7 +19,7 @@ A quick guide of how to install and use Juumla.
 ```shell
 1. Clone the repository with git clone https://github.com/oppsec/juumla.git
 2. Install the libraries with pip3 install -r requirements.txt
-3. Execute Juumla scanner with: python3 main.py https://example.com
+3. Execute Juumla scanner with: python3 main.py -u https://example.com
 ```
 
 <br><br>
