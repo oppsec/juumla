@@ -1,6 +1,6 @@
 # 🦁 Juumla
 
-<img src="./design/preview.png" width="600" height="350">
+<img src="./design/preview.png" width="600" height="500">
 
 <br><br>
 
