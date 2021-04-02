@@ -12,10 +12,11 @@ def main():
     get_banner()
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-u', help='Target URL', type=str)
+    parser.add_argument('-u', help='Target URL to perform Joomla scanner', type=str)
     args = parser.parse_args()
 
     connection_check(args)
+
 
 if __name__ == "__main__":
     main()
