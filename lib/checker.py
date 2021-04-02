@@ -7,9 +7,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 from lib.version import get_joomla_version_1
 
-connection_headers = {
-    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'
-}
+connection_headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
 
 def connection_check(args):
     try:
@@ -18,7 +16,7 @@ def connection_check(args):
 
         if(status_code == 200):
             print(f'[green][INF] Connected successfully with {args.u} | {status_code} [/]')
-            joomla_check_1(args)
+            check_1(args)
         else:
             return print(f'[red][ERR] Connection problems with {args.u} | {status_code} [/]')
 
@@ -29,7 +27,8 @@ def connection_check(args):
         return print(f'[red][ERR] Invalid URL, please use http or https before the URL.')
 
 
-def joomla_check_1(args):
+def check_1(args):
+    print('\n[cyan][INF] Trying to detect Joomla... [/]')
     admin_path = f"{args.u}/administrator"
     admin_text = "Joomla!"
 
@@ -39,17 +38,17 @@ def joomla_check_1(args):
         status_code = admin_request.status_code
 
         if(status_code == 200 and admin_text in body):
-            print('[green][INF] Joomla detected successfully on first check. [/]')
+            print('[green][INF] Joomla detected successfully on 1° check. [/]')
             get_joomla_version_1(args)
         else:
-            print(f"\n[yellow][WRN] Can't find Joomla admin login, passing check... [/]")
-            joomla_check_2(args)
+            print(f"[yellow][WRN] Can't find Joomla admin login, passing check... [/]")
+            check_2(args)
 
     except requests.exceptions.ConnectionError as e:
         return print(f'[red][ERR] Connection problems with {args.u} | {e}[/]')
 
 
-def joomla_check_2(args):
+def check_2(args):
     joomla_logo_path = f"{args.u}/administrator/templates/khepri/images/h_green/j_header_left.png"
 
     try:
@@ -57,17 +56,17 @@ def joomla_check_2(args):
         status_code = logo_request.status_code
 
         if(status_code == 200):
-            print('[green][INF] Joomla detected successfully on second check. [/]')
+            print('[green][INF] Joomla detected successfully on 2° check. [/]')
             get_joomla_version_1(args)
         else:
             print(f"[yellow][WRN] Can't find Joomla logo, passing check... [/]")
-            joomla_check_3(args)
+            check_3(args)
 
     except requests.exceptions.ConnectionError as e:
         return print(f'[red][ERR] Connection problems with {args.u} | {e}[/]')
 
 
-def joomla_check_3(args):
+def check_3(args):
     joomla_robots = f"{args.u}/robots.txt"
 
     try:
@@ -76,16 +75,33 @@ def joomla_check_3(args):
         body = robots_request.text
         
         if(status_code == 200 and 'Joomla' or '/components' in body):
-            print('[green][INF] Joomla detected successfully on third check. [/]')
+            print('[green][INF] Joomla detected successfully on 3° check. [/]')
             get_joomla_version_1(args)
         else:
             print(f"[yellow][WRN] Can't find Joomla logo, passing check... [/]")
-            joomla_check_4(args)
+            check_4(args)
     except requests.exceptions.ConnectionError as e:
         return print(f'[red][ERR] Connection problems with {args.u} | {e}[/]')
 
 
-def joomla_check_4(args):
+def check_4(args):
+    try:
+        response = requests.get(args.u, verify=False, timeout=10, allow_reditects=False, headers=connection_headers)
+        status_code = response.status_code
+        body = response.text
+
+        if(status_code == 200 and '<meta name="generator" content="Joomla!' in body):
+            print('[green][INF] Joomla detected successfully on 4° check. [/]')
+            get_joomla_version_1(args)
+        else:
+            print(f"[yellow][WRN] Can't find Joomla meta generator tag, passing check... [/]")
+            last_check(args)
+            
+    except requests.exceptions.ConnectionError as e:
+        return print(f'[red][ERR] Connection problems with {args.u} | {e}[/]')
+
+
+def last_check(args):
     manifest_path = f'{args.u}/administrator/manifests/files/joomla.xml'
     language_path = f'{args.u}/language/en-GB/en-GB.xml'
 
