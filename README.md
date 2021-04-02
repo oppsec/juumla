@@ -1,6 +1,6 @@
 # 🦁 Juumla
 
-<img src="./design/preview.png" width="600" height="500">
+<img src="./design/preview.png" width="700" height="500">
 
 <br><br>
 
@@ -39,7 +39,7 @@ A quick guide of how to install and use Juumla.
 
 ### 📚 To-Do
 - [ ] Vulnerability Scanner
-- [x] Increase Joomla detection
+- [x] Improve Joomla detection
 - [ ] Config files detection
 
 <br><br>
