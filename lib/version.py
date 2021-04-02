@@ -5,6 +5,8 @@ import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+from lib.files import files_finder
+
 import os
 import xmltodict
 
@@ -12,7 +14,7 @@ xml_header_1 = 'application/xml'
 xml_header_2 = 'text/xml'
 
 def get_joomla_version_1(args):
-    print('\n[yellow][INF] Trying to get Joomla version... [/]')
+    print('\n[cyan][INF] Trying to get Joomla version... [/]')
 
     manifest_path = f'{args.u}/administrator/manifests/files/joomla.xml'
 
@@ -26,8 +28,9 @@ def get_joomla_version_1(args):
             joomla_version = data["extension"]["version"]
 
             print(f"[green][INF] Joomla version found: {joomla_version}\n")
+            files_finder(args)
         else:
-            print(f'\n[red][ERR] Joomla version not found on first check... [/]')
+            print(f'[red][ERR] Joomla version not found on first check... [/]')
             get_joomla_version_2(args)
 
     except requests.exceptions.ConnectionError:
@@ -51,6 +54,7 @@ def get_joomla_version_2(args):
             joomla_version = data["metafile"]["version"]
 
             print(f"[green][INF] Joomla version found: {joomla_version} on second check\n")
+            files_finder(args)
         else:
             return print(f'\n[red][ERR] Joomla version not found on second check... [/]')
             
