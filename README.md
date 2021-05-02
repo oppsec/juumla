@@ -8,7 +8,7 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/oppsec/xcreen/issues)
 [![Follow on Twitter](https://img.shields.io/twitter/follow/opps3c.svg?logo=twitter)](https://twitter.com/oppsec)
 
-**Juumla** is a python cli tool developed to help with Joomla information gathering.
+**Juumla** is a python tool designed to identify and scan for version, config files in Joomla! 
 
 <br>
 
