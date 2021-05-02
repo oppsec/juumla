@@ -5,18 +5,19 @@ import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-from lib.version import get_joomla_version_1
+from lib.version import get_joomla_version
+from lib.agent import get_user_agent
 
-connection_headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
+headers = {'User-Agent': get_user_agent()}
 
 def connection_check(args):
     try:
-        response = requests.get(args.u, verify=False, timeout=10, allow_redirects=False, headers=connection_headers)
+        response = requests.get(args.u, verify=False, timeout=10, allow_redirects=False, headers=headers)
         status_code = response.status_code
 
         if(status_code == 200):
             print(f'[green][INF] Connected successfully with {args.u} | {status_code} [/]')
-            check_1(args)
+            first_check(args)
         else:
             return print(f'[red][ERR] Connection problems with {args.u} | {status_code} [/]')
 
@@ -27,74 +28,91 @@ def connection_check(args):
         return print(f'[red][ERR] Invalid URL, please use http or https before the URL.')
 
 
-def check_1(args):
+def first_check(args):
     print('\n[cyan][INF] Trying to detect Joomla... [/]')
     admin_path = f"{args.u}/administrator"
     admin_text = "Joomla!"
 
     try:
-        admin_request = requests.get(admin_path, verify=False, timeout=10, allow_redirects=True, headers=connection_headers)
+        admin_request = requests.get(admin_path, verify=False, timeout=10, allow_redirects=True, headers=headers)
         body = admin_request.text
         status_code = admin_request.status_code
 
         if(status_code == 200 and admin_text in body):
             print('[green][INF] Joomla detected successfully on 1° check. [/]')
-            get_joomla_version_1(args)
+            get_joomla_version(args)
         else:
-            print(f"[yellow][WRN] Can't find Joomla admin login, passing check... [/]")
-            check_2(args)
+            print(f"[yellow][WRN] Can't detect Joomla admin login, passing check... (1° check)  [/]")
+            second_check(args)
 
     except requests.exceptions.ConnectionError as e:
         return print(f'[red][ERR] Connection problems with {args.u} | {e}[/]')
 
 
-def check_2(args):
+def second_check(args):
     joomla_logo_path = f"{args.u}/administrator/templates/khepri/images/h_green/j_header_left.png"
 
     try:
-        logo_request = requests.get(joomla_logo_path, verify=False, timeout=10, allow_redirects=False, headers=connection_headers)
+        logo_request = requests.get(joomla_logo_path, verify=False, timeout=10, allow_redirects=False, headers=headers)
         status_code = logo_request.status_code
 
         if(status_code == 200):
             print('[green][INF] Joomla detected successfully on 2° check. [/]')
-            get_joomla_version_1(args)
+            get_joomla_version(args)
         else:
-            print(f"[yellow][WRN] Can't find Joomla logo, passing check... [/]")
-            check_3(args)
+            print(f"[yellow][WRN] Can't detect Joomla logo, passing check... (2° check) [/]")
+            third_check(args)
 
     except requests.exceptions.ConnectionError as e:
         return print(f'[red][ERR] Connection problems with {args.u} | {e}[/]')
 
 
-def check_3(args):
+def third_check(args):
     joomla_robots = f"{args.u}/robots.txt"
 
     try:
-        robots_request = requests.get(joomla_robots, verify=False, timeout=10, allow_redirects=False, headers=connection_headers)
+        robots_request = requests.get(joomla_robots, verify=False, timeout=10, allow_redirects=False, headers=headers)
         status_code = robots_request.status_code
         body = robots_request.text
         
         if(status_code == 200 and 'Joomla' or '/components' in body):
             print('[green][INF] Joomla detected successfully on 3° check. [/]')
-            get_joomla_version_1(args)
+            get_joomla_version(args)
         else:
-            print(f"[yellow][WRN] Can't find Joomla logo, passing check... [/]")
-            check_4(args)
+            print(f"[yellow][WRN] Can't detect Joomla on body, passing check... (3° check) [/]")
+            fourth_check(args)
     except requests.exceptions.ConnectionError as e:
         return print(f'[red][ERR] Connection problems with {args.u} | {e}[/]')
 
 
-def check_4(args):
+def fourth_check(args):
     try:
-        response = requests.get(args.u, verify=False, timeout=10, allow_reditects=False, headers=connection_headers)
+        response = requests.get(args.u, verify=False, timeout=10, allow_reditects=False, headers=headers)
         status_code = response.status_code
         body = response.text
 
-        if(status_code == 200 and '<meta name="generator" content="Joomla!' in body):
+        if(status_code == 200 and '<meta name="generator" content="Joomla' in body):
             print('[green][INF] Joomla detected successfully on 4° check. [/]')
-            get_joomla_version_1(args)
+            get_joomla_version(args)
         else:
-            print(f"[yellow][WRN] Can't find Joomla meta generator tag, passing check... [/]")
+            print(f"[yellow][WRN] Can't detect Joomla meta generator tag, passing check... (4° check) [/]")
+            fifth_check(args)
+            
+    except requests.exceptions.ConnectionError as e:
+        return print(f'[red][ERR] Connection problems with {args.u} | {e}[/]')
+
+
+def fifth_check(args):
+    try:
+        response = requests.get(args.u, verify=False, timeout=10, allow_reditects=False, headers=headers)
+        status_code = response.status_code
+        body = response.text
+
+        if(status_code == 200 and '/index.php?option=com_search' in body):
+            print('[green][INF] Joomla detected successfully on 5° check. [/]')
+            get_joomla_version(args)
+        else:
+            print(f"[yellow][WRN] Can't detect Joomla search method, passing check... (5° check) [/]")
             last_check(args)
             
     except requests.exceptions.ConnectionError as e:
@@ -106,15 +124,15 @@ def last_check(args):
     language_path = f'{args.u}/language/en-GB/en-GB.xml'
 
     try:
-        manifest_request = requests.get(manifest_path, verify=False, timeout=10, allow_redirects=False, headers=connection_headers)
-        language_request = requests.get(language_path, verify=False, timeout=10, allow_redirects=False, headers=connection_headers)
+        manifest_request = requests.get(manifest_path, verify=False, timeout=10, allow_redirects=False, headers=headers)
+        language_request = requests.get(language_path, verify=False, timeout=10, allow_redirects=False, headers=headers)
 
-        status_code = manifest_request.status_code
-        status_code_2 = language_request.status_code
+        manifest_status_code = manifest_request.status_code
+        language_status_code = language_request.status_code
 
-        if(status_code or status_code_2 == 200):
+        if(manifest_status_code or language_status_code == 200):
             print('\n[green][INF] 50% chance that Joomla has been detected... [/]')
-            get_joomla_version_1(args)
+            get_joomla_version(args)
         else:
             return print(f'[red][ERR] Joomla has not found, stopping... [/]')  
 
