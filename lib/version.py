@@ -1,70 +1,70 @@
+import re
 from rich import print
 
-import requests
-
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+from requests import get, exceptions
+from urllib3 import disable_warnings
+disable_warnings()
 
 from lib.files import files_finder
-from lib.agent import get_user_agent
+from lib.manager import props
+from lib.info import *
 
-import os
-import xmltodict
+from xmltodict import parse, expat
+
 
 first_xml_header = 'application/xml'
 second_xml_header = 'text/xml'
 
-headers = {'User-Agent': get_user_agent()}
+def get_joomla_version(args: str) -> str:
 
+    print(version_check)
 
-def get_joomla_version(args):
-    print('\n[cyan][INF] Trying to get Joomla version... [/]')
-
-    manifest_path = f'{args.u}/administrator/manifests/files/joomla.xml'
+    url = f'{args.u}{manifest_joomla}'
 
     try:
-        response = requests.get(manifest_path, verify=False, timeout=10, allow_redirects=False, headers=headers)
+        response = get(url, **props)
         response_headers = response.headers
         status_code = response.status_code
 
         if(status_code == 200 and first_xml_header or second_xml_header in response_headers):
-            data = xmltodict.parse(response.content)
+            data = parse(response.content)
             joomla_version = data["extension"]["version"]
 
-            print(f"[green][INF] Joomla version detected: {joomla_version}\n")
+            print(f"[green][INF] Joomla version detected: {joomla_version} on 1° check\n")
             files_finder(args)
         else:
-            print(f"[red][ERR] Can't detect Joomla version on 1° check... [/]")
+            print(fail_version_first)
             get_joomla_version_2(args)
 
-    except requests.exceptions.ConnectionError:
-        return print(f'\n[red][ERR] Connection problems with {manifest_path}[/]')
-    except xmltodict.expat.ExpatError:
-        return print(f"[red][ERR] Can't parse Joomla XML, stopping... \n[/]")
+    except exceptions.ConnectionError:
+        return print(f'\n[red][ERR] Connection problems with {url}[/]')
+    except expat.ExpatError:
+        return print(xml_parse)
     except KeyError:
-        return print(f'\n[red][ERR] Possible false positve on Joomla detection.[/]')
+        return print(false_positive)
     
 
-def get_joomla_version_2(args):
-    language_path = f'{args.u}/language/en-GB/en-GB.xml'
+def get_joomla_version_2(args: str) -> str:
+    
+    url = f"{args.u}{language_joomla}"
 
     try:
-        response = requests.get(language_path, verify=False, timeout=10, allow_redirects=False, headers=headers)
+        response = get(url, **props)
         response_headers = response.headers
         status_code = response.status_code
 
         if(status_code == 200 and first_xml_header or second_xml_header in response_headers):
-            data = xmltodict.parse(response.content)
+            data = parse(response.content)
             joomla_version = data["metafile"]["version"]
 
-            print(f"[green][INF] Joomla version found: {joomla_version} on second check\n")
+            print(f"[green][INF] Joomla version found: {joomla_version} on 2° check\n")
             files_finder(args)
         else:
-            return print(f"[red][ERR] Can't detect Joomla version on 2° check, stopping... [/]")
+            return print(fail_version_second)
             
-    except requests.exceptions.ConnectionError:
-        return print(f'\n[red][ERR] Connection problems with {language_path}[/]')
-    except xmltodict.expat.ExpatError:
-        return print(f"[red][ERR] Can't parse Joomla XML, stopping... \n[/]")
+    except exceptions.ConnectionError:
+        return print(f'\n[red][ERR] Connection problems with {url} [/]')
+    except expat.ExpatError:
+        return print(xml_parse)
     except KeyError:
-        return print(f'\n[red][ERR] Possible false positve on Joomla detection.[/]')
+        return print(false_positive)

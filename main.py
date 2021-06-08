@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
 
-from design.banner import get_banner
-from design.clear import clear
+from design.ui import clear, get_banner
+from lib.detect import connect
 
-from lib.checker import connection_check
+from argparse import ArgumentParser
 
-import argparse
 
-def main():
+def main() -> None:
+
     clear()
     get_banner()
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-u', help='Target URL to perform Joomla scanner', type=str)
+    parser = ArgumentParser()
+    parser.add_argument('-u', help='Website URL to run Juumla', required=True)
     args = parser.parse_args()
 
-    connection_check(args)
+    connect(args)
 
 
-if __name__ == "__main__":
-    main()
+main()
