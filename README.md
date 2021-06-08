@@ -1,22 +1,25 @@
 # 🦁 Juumla
+<div align="center">
+    <img src="./design/preview.png" width="700" height="500">
+</div>
 
-<img src="./design/preview.png" width="700" height="500">
+<p align="center">
+    <img src="https://img.shields.io/github/license/oppsec/juumla?color=orange&logo=github&logoColor=orange&style=for-the-badge">
+    <img src="https://img.shields.io/github/issues/oppsec/juumla?color=orange&logo=github&logoColor=orange&style=for-the-badge">
+    <img src="https://img.shields.io/github/stars/oppsec/juumla?color=orange&label=STARS&logo=github&logoColor=orange&style=for-the-badge">
+</p>
 
-<br><br>
+<br>
 
-[![License](https://img.shields.io/badge/license-MIT-_red.svg)](https://opensource.org/licenses/MIT)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/oppsec/xcreen/issues)
-[![Follow on Twitter](https://img.shields.io/twitter/follow/opps3c.svg?logo=twitter)](https://twitter.com/oppsec)
-
-**Juumla** is a python tool designed to identify and scan for version, config files in Joomla! 
+<p> <b>Juumla</b> is a python tool developed to identify the current Joomla version and scan for readable Joomla config files. </p>
 
 <br>
 
 ## ⚡ Installing / Getting started
 
-A quick guide of how to install and use Juumla.
+<p> A quick guide of how to install and use Juumla. </p>
 
-```shell
+```
 1. Clone the repository with git clone https://github.com/oppsec/juumla.git
 2. Install the libraries with pip3 install -r requirements.txt
 3. Execute Juumla scanner with: python3 main.py -u https://example.com
@@ -33,7 +36,9 @@ A quick guide of how to install and use Juumla.
 ### ✨ Features
 - Fast scan
 - Low RAM and CPU usage
-- Joomla version detection
+- Identify Joomla version
+- Config files detection
+- Open-Source
 
 <br><br>
 
@@ -41,6 +46,7 @@ A quick guide of how to install and use Juumla.
 - [ ] Vulnerability Scanner
 - [x] Improve Joomla detection
 - [x] Config files detection
+- [x] Improve code
 
 <br><br>
 
@@ -48,13 +54,13 @@ A quick guide of how to install and use Juumla.
 
 A quick guide of how to contribute with the project.
 
-```shell
-1. Create a fork from Juumla repository.
+```
+1. Create a fork from Juumla repository
 2. Download the project with git clone https://github.com/your/juumla.git
-3. cd juumla/
-4. Make your changes.
-5. Commit and make a git push.
-6. Open a pull request.
+3. Type cd juumla/
+4. Make your changes
+5. Commit and make a git push
+6. Open a pull request
 ```
 
 <br><br>
