@@ -7,6 +7,7 @@
     <img src="https://img.shields.io/github/license/oppsec/juumla?color=orange&logo=github&logoColor=orange&style=for-the-badge">
     <img src="https://img.shields.io/github/issues/oppsec/juumla?color=orange&logo=github&logoColor=orange&style=for-the-badge">
     <img src="https://img.shields.io/github/stars/oppsec/juumla?color=orange&label=STARS&logo=github&logoColor=orange&style=for-the-badge">
+    <img src="https://img.shields.io/github/languages/code-size/oppsec/juumla?color=orange&logo=github&logoColor=orange&style=for-the-badge">
 </p>
 
 <br>
