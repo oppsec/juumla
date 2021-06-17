@@ -6,7 +6,7 @@
  \___/ \__,_|\__,_|_| |_| |_|_|\__,_|
  
 Python Joomla Vulnerability Scanner
-build: 0.0.9a - release: 08/06/2021 (br)
+build: 0.1.0a
 by @opps3c
 
 ========================================
