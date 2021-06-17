@@ -21,9 +21,18 @@
 <p> A quick guide of how to install and use Juumla. </p>
 
 ```
-1. Clone the repository with git clone https://github.com/oppsec/juumla.git
-2. Install the libraries with pip3 install -r requirements.txt
-3. Execute Juumla scanner with: python3 main.py -u https://example.com
+1. Clone the repository - git clone https://github.com/oppsec/juumla.git
+2. Install the libraries - pip3 install -r requirements.txt
+3. Run Juumla - python3 main.py -u https://example.com
+```
+
+### 🐳 Docker
+If you want to install Juumla in a Docker container, follow this commands:
+
+```
+1. Clone the repository - git clone https://github.com/oppsec/juumla.git
+2. Build the image - sudo docker build -t juumla:latest .
+3. Run container - sudo docker run juumla:latest
 ```
 
 <br><br>
