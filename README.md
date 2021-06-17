@@ -27,7 +27,7 @@
 ```
 
 ### 🐳 Docker
-If you want to install Juumla in a Docker container, follow this commands:
+If you want to run Juumla in a Docker container, follow this commands:
 
 ```
 1. Clone the repository - git clone https://github.com/oppsec/juumla.git
