@@ -1,21 +1,16 @@
 #!/usr/bin/env python3
 
-from design.ui import clear, get_banner
-from lib.detect import connect
+from src.interface.ui import clear, banner
+from src.juumla.main import start
 
 from argparse import ArgumentParser
 
-
-def main() -> None:
-
+if __name__ == "__main__":
     clear()
-    get_banner()
+    banner()
 
-    parser = ArgumentParser()
-    parser.add_argument('-u', help='Website URL to run Juumla', required=True)
-    args = parser.parse_args()
+    parser: str = ArgumentParser()
+    parser.add_argument('-u', help='Target URL to run Juumla', required=True)
+    args: str   = parser.parse_args()
 
-    connect(args)
-
-
-main()
+    start(args)

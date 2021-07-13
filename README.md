@@ -1,7 +1,9 @@
 # 🦁 Juumla
 <div align="center">
-    <img src="./design/out.png" width="700" height="500">
+    <img src="./assets/banner.png">
 </div>
+
+<br>
 
 <p align="center">
     <img src="https://img.shields.io/github/license/oppsec/juumla?color=orange&logo=github&logoColor=orange&style=for-the-badge">
@@ -25,6 +27,8 @@
 2. Install the libraries - pip3 install -r requirements.txt
 3. Run Juumla - python3 main.py -u https://example.com
 ```
+
+<br>
 
 ### 🐳 Docker
 If you want to install Juumla in a Docker container, follow this commands:
@@ -53,7 +57,7 @@ If you want to install Juumla in a Docker container, follow this commands:
 <br><br>
 
 ### 📚 To-Do
-- [ ] Vulnerability Scanner
+- [x] Vulnerability Scanner
 - [x] Improve Joomla detection
 - [x] Config files detection
 - [x] Improve code
