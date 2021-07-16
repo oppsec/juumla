@@ -79,5 +79,10 @@ A quick guide of how to contribute with the project.
 
 <br><br>
 
+### 📄 Resources
+https://skynettools.com/juumla-python-cli-tool-for-joomla-information-hathering/
+
+<br><br>
+
 ### ⚠️ Warning
 - The developer is not responsible for any malicious use of this tool.
