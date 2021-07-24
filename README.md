@@ -80,7 +80,7 @@ A quick guide of how to contribute with the project.
 <br><br>
 
 ### 📄 Resources
-https://skynettools.com/juumla-python-cli-tool-for-joomla-information-hathering/
+https://skynettools.com/juumla-python-tool-developed-to-identify-current-joomla-version-scan-for-readable-joomla-config-files/
 
 <br><br>
 
