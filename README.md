@@ -80,7 +80,11 @@ A quick guide of how to contribute with the project.
 <br><br>
 
 ### 📄 Resources
-https://skynettools.com/juumla-python-tool-developed-to-identify-current-joomla-version-scan-for-readable-joomla-config-files/
+[SkynetTools](https://skynettools.com/juumla-python-tool-developed-to-identify-current-joomla-version-scan-for-readable-joomla-config-files/) <br>
+[KitPloit](https://www.kitploit.com/2021/07/juumla-tool-designed-to-identify-and.html)<br>
+[Reddit](https://www.reddit.com/user/esgeeks/comments/oqbykn/juumla_identificar_y_escanear_la_versi%C3%B3n_archivos/) <br>
+[Hacking Land](https://www.hacking.land/2021/07/juumla-tool-designed-to-identify-and.html) <br>
+[Hacking Diary](https://hackingdiary.tech/kitploit/juumla-tool-designed-to-identify-and-scan-for-version-config-files-in-the-cms-joomla/)
 
 <br><br>
 
