@@ -14,7 +14,7 @@
 
 <br>
 
-<p> <b>Juumla</b> is a python tool developed to identify the current Joomla version and scan for readable Joomla config files. </p>
+<p> 🦁 <b>Juumla</b> is a python tool designed to identify Joomla version, scan for vulnerabilities and search for config files. </p>
 
 <br>
 
