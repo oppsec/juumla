@@ -8,7 +8,7 @@ from src.juumla.modules.version import get_version
 disable_warnings()
 
 def start(args) -> None:
-    """ Try to connect to the target passed in -u flag """
+    " Check if host address is alive to start Juumla checker "
 
     try:
         response: str = get(args.u, **props)
@@ -16,7 +16,7 @@ def start(args) -> None:
         body: str = response.text
 
         check = lambda success = 200: status_code == success
-        (detect_joomla(args, body)) if check() else print(f"[red][-] Website returned a status code different than 200 | {status_code} [/]")
+        (detect_joomla(args, body)) if check() else print(f"[red][-] Returned status code: {status_code} [/]")
 
     except exceptions.ConnectionError as error:
         return print(f"[red][-] Connection problems with {args.u} | {error} [/]")
@@ -24,12 +24,12 @@ def start(args) -> None:
     except exceptions.MissingSchema as error:
         return print(f"[red][-] Invalid URL, try with: http(s)://{args.u}")
 
-    except exceptions.InvalidURL:
-        return print(f"[red][-] Invalid URL, please check your URL.")
+    except exceptions.InvalidURL as error:
+        return print(f"[red][-] Invalid URL... | {error}")
 
 
 def detect_joomla(args, body) -> None:
-    """ Try to detect Joomla on target """
+    " Run checker to detect if target is running Joomla CMS "
 
     print("[yellow][!] Checking if target is running Joomla... [/]")
 
@@ -39,7 +39,8 @@ def detect_joomla(args, body) -> None:
     script_type = "joomla-script-options"
 
     if basic or meta or csrf_token or script_type in body:
-        print("[green][+] Target is running Joomla! [/]")
+        print("[green][+] Target is running Joomla [/]")
         get_version(args)
+
     else:
-        return print("[red][-] Sorry, couldn't detect Joomla on target... [/]")
+        return print("[red][-] Target is not running Joomla apparently [/]")
