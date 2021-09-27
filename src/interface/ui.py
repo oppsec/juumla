@@ -2,11 +2,11 @@ from rich import print
 
 
 def banner() -> str:
-    """ Return the Juumla banner from banner.txt file """
+    " Return application banner from banner.txt file "
 
-    filename: str = "src/interface/banner.txt"
+    file_path: str = "src/interface/banner.txt"
     
-    with open(filename) as file:
-        content: str = file.read()
+    with open(file_path) as content:
+        lines: str = content.read()
 
-        return print(f"[bold yellow]{content}[/]")
+        return print(f"[bold yellow]{lines}")

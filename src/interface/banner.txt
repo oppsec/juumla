@@ -6,4 +6,4 @@
 \/_____/   \/_____/   \/_____/   \/_/  \/_/   \/_____/   \/_/\/_/ 
                                                                   
 Python Joomla Vulnerability Scanner
-build: 0.1.2
+build: 0.1.2a
