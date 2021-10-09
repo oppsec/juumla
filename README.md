@@ -14,7 +14,7 @@
 
 <br>
 
-<p> 🦁 <b>Juumla</b> is a python tool designed to identify Joomla version, scan for vulnerabilities and search for config files. </p>
+<p> 🦁 <b>Juumla</b> is a python tool created to identify Joomla version, scan for vulnerabilities and search for config and backup files. </p>
 
 <br>
 
@@ -50,9 +50,10 @@ If you want to run Juumla in a Docker container, follow this commands:
 ### ✨ Features
 - Fast scan
 - Low RAM and CPU usage
-- Identify Joomla version
-- Config files detection
-- Open-Source
+- Detect Joomla version
+- Find config and backup files
+- Scan for vulnerabilities based in Joomla version
+- Totally open-source
 
 <br><br>
 
@@ -71,20 +72,10 @@ A quick guide of how to contribute with the project.
 ```
 1. Create a fork from Juumla repository
 2. Download the project with git clone https://github.com/your/juumla.git
-3. Type cd juumla/
-4. Make your changes
-5. Commit and make a git push
-6. Open a pull request
+3. Make your changes
+4. Commit and make a git push
+5. Open a pull request
 ```
-
-<br><br>
-
-### 📄 Resources
-[SkynetTools](https://skynettools.com/juumla-python-tool-developed-to-identify-current-joomla-version-scan-for-readable-joomla-config-files/) <br>
-[KitPloit](https://www.kitploit.com/2021/07/juumla-tool-designed-to-identify-and.html)<br>
-[Reddit](https://www.reddit.com/user/esgeeks/comments/oqbykn/juumla_identificar_y_escanear_la_versi%C3%B3n_archivos/) <br>
-[Hacking Land](https://www.hacking.land/2021/07/juumla-tool-designed-to-identify-and.html) <br>
-[Hacking Diary](https://hackingdiary.tech/kitploit/juumla-tool-designed-to-identify-and-scan-for-version-config-files-in-the-cms-joomla/)
 
 <br><br>
 
