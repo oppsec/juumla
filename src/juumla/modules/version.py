@@ -1,16 +1,16 @@
 from requests import get, exceptions
-
 from urllib3 import disable_warnings
-disable_warnings()
-
 from xmltodict import parse, expat
 from rich import print
 
 from src.juumla.settings import props
 from src.juumla.modules.vulns import vuln_manager
 
+disable_warnings()
+
 app_xml_header = "application/xml"
 text_xml_header = "text/xml"
+
 
 def get_version(args) -> None:
     """ Try to get Joomla target version """
@@ -20,9 +20,9 @@ def get_version(args) -> None:
     xml_file = f"{args.u}/language/en-GB/en-GB.xml"
 
     try:
-        response = get(xml_file, **props)
-        status_code = response.status_code
-        headers = response.headers
+        response: str = get(xml_file, **props)
+        status_code: str = response.status_code
+        headers: str = response.headers
 
         if status_code == 200 and app_xml_header or text_xml_header in headers:
             data = parse(response.content)
