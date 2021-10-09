@@ -9,4 +9,4 @@ def banner() -> str:
     with open(file_path) as content:
         lines: str = content.read()
 
-        return print(f"[bold yellow]{lines}")
+        return print(f"[bold yellow]{lines} [/]")
