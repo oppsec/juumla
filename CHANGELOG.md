@@ -1,3 +1,9 @@
+# 0.1.3b - 12/01/2022
+- Updated libraries version
+- Improved the code a bit
+
+<br>
+
 # 0.1.2a - 27/09/2021
 - Made functions description more readable
 - Added more whitespaces on the code
