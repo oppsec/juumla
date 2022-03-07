@@ -1,6 +1,7 @@
 from requests import get, exceptions
 from rich import box, print
 from rich.table import Table
+from rich.logging import RichHandler
 from urllib3 import disable_warnings
 
 from src.juumla.settings import props, get_today_date
@@ -19,7 +20,7 @@ def start(args) -> None:
     table.add_column("Target", justify="center", style="yellow")
     table.add_column("Date", justify="center", style="yellow")
 
-    table.add_row("build: 0.1.3", f"{args.u}", f"{get_today_date}")
+    table.add_row("build: 0.1.3b", f"{args.u}", f"{get_today_date}")
 
     print(table)
 

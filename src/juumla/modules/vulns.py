@@ -6,7 +6,7 @@ from src.juumla.modules.files import files_manager
 def vuln_manager(args, version) -> None:
     """ Search for vulnerabilities on current target Joomla version """
 
-    print("\n[cyan][-] Started vulnerabilities scanner... [2/3] [/]")
+    print("\n[cyan][-] Running Joomla vulnerabilities detector... [2/3] [/]")
 
     filename: str = "src/juumla/data/vulnerabilites.json"
     
@@ -25,5 +25,5 @@ def vuln_manager(args, version) -> None:
                 pass
 
 
-    print("[yellow][!] Vulnerabilities scanner finished [2/3] [/]")
+    print("[yellow][!] Vulnerabilities detector finished [2/3] [/]")
     files_manager(args)

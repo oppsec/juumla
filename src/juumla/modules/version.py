@@ -15,7 +15,7 @@ text_xml_header = "text/xml"
 def get_version(args) -> None:
     """ Try to get Joomla target version """
 
-    print("\n[cyan][-] Started version detector... [1/3] [/]")
+    print("\n[cyan][-] Running Joomla version detector... [1/3] [/]")
 
     xml_file = f"{args.u}/language/en-GB/en-GB.xml"
 
