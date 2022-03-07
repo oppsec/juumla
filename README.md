@@ -1,6 +1,6 @@
 # 🦁 Juumla
 <div align="center">
-    <img src="./assets/banner.png" width="490">
+    <img src="./assets/banner.png" width="800">
 </div>
 
 <br>
