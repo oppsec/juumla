@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-rich==11.0.0
+rich==12.4.1
 requests==2.27.1
-xmltodict==0.12.0
-=======
-rich==11.2.0
-requests==2.27.1
-xmltodict==0.12.0
->>>>>>> 89ddb923c90ad450f9f869f7195be9f6668f994c
+xmltodict==0.13.0
