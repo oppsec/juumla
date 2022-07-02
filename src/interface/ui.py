@@ -1,12 +1,9 @@
 from rich import print
 
-
 def banner() -> str:
-    " Return application banner from banner.txt file "
+    " Return the content from banner.txt file as application banner "
 
-    file_path: str = "src/interface/banner.txt"
-    
-    with open(file_path) as content:
-        lines: str = content.read()
-
-        return print(f"[bold yellow]{lines} [/]")
+    path: str = "src/interface/banner.txt"
+    with open(path) as file:
+        lines: str = file.read()
+        print(f"[bold yellow]{lines}[/]")
