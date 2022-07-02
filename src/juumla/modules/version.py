@@ -13,34 +13,28 @@ text_xml_header = "text/xml"
 
 
 def get_version(args) -> None:
-    """ Try to get Joomla target version """
+    " Get Joomla version based on XML files response "
 
-    print("\n[cyan][-] Running Joomla version detector... [1/3] [/]")
+    print("\n[cyan]> Running Joomla version scanner... [1/3] [/]")
 
     xml_file = f"{args.u}/language/en-GB/en-GB.xml"
 
     try:
         response: str = get(xml_file, **props)
-        status_code: str = response.status_code
         headers: str = response.headers
 
-        if status_code == 200 and app_xml_header or text_xml_header in headers:
+        if response.ok and app_xml_header or text_xml_header in headers:
             data = parse(response.content)
             version = data["metafile"]["version"]
 
-            print(f"[green][+] Joomla version is: {version} [/]")
+            print(f"[green]> Joomla version is: {version} [/]")
             vuln_manager(args, version)
-
         else:
-            print("[yellow][!] Couldn't get Joomla version, trying other way... [/]")
+            print("[yellow]> Couldn't get Joomla version, trying other way... [/]")
             last_version_try(args)
 
-    except exceptions.ConnectionError:
-        return print(f'\n[red][-] Connection problems with {xml_file}[/]')
-    except expat.ExpatError:
-        return print(f"\n[red][-] Couldn't get Joomla version, stopping... [/]")
-    except KeyError:
-        return print(f"\n[red][-] Possible false positive, stopping... [/]")
+    except exceptions as error:
+        return print(f"[red]> Error when trying to get Joomla version: {args.u} | {error} [/]")
 
 
 def last_version_try(args) -> None:
@@ -50,23 +44,17 @@ def last_version_try(args) -> None:
 
     try:
         response = get(manifest_file, **props)
-        status_code = response.status_code
         headers = response.headers
 
-        if status_code == 200 and app_xml_header or text_xml_header in headers:
+        if response.ok and app_xml_header or text_xml_header in headers:
             data = parse(response.content)
             version = data["extesion"]["version"]
 
-            print(f"[green][+] Joomla version is: {version} [/]")
+            print(f"> Joomla version is: {version} [/]")
             vuln_manager(args, version)
-
         else:
-            return print("[yellow][!] Couldn't get Joomla version, stopping... [/]")
+            return print("[yellow]> Couldn't get Joomla version, stopping... [/]")
 
-    except exceptions.ConnectionError:
-        return print(f'\n[red][-] Connection problems with {manifest_file}[/]')
-    except expat.ExpatError:
-        return print(f"\n[red][-] Couldn't get Joomla version, stopping... [/]")
-    except KeyError:
-        return print(f"\n[red][-] Possible false positive, stopping... [/]")
+    except exceptions as error:
+        return print(f"[red]> Error when trying to get Joomla version (2): {args.u} | {error} [/]")
 

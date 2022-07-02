@@ -1,6 +1,4 @@
 from random import randint
-from datetime import datetime
-
 
 def get_user_agent() -> str:
     " Return a random User-Agent from user-agents.txt file to use in request "
@@ -27,5 +25,3 @@ props = {
     'allow_redirects': True,
     'headers': headers
 }
-
-get_today_date = datetime.today().strftime('%Y-%m-%d')
