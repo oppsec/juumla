@@ -1,3 +1,11 @@
+# 0.1.4 - 02/06/2022
+- Improved the code
+- Removed useless checks
+- Changed Juumla banner
+- Changed status messages
+
+<br>
+
 # 0.1.3b - 12/01/2022
 - Updated libraries version
 - Improved the code a bit
