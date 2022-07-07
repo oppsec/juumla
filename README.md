@@ -12,6 +12,8 @@
     <img src="https://img.shields.io/github/languages/code-size/oppsec/juumla?color=yellow&logo=github&logoColor=yellow&style=for-the-badge">
 </p>
 
+___
+
 <br>
 
 <p> 🦁 <b>Juumla</b> is a python tool created to identify Joomla version, scan for vulnerabilities and search for config or backup files. </p>
@@ -72,7 +74,7 @@ A quick guide on how to contribute to the project.
 1. Create a fork from Juumla repository
 2. Download the project with git clone https://github.com/your/juumla.git
 3. Make your changes
-4. Commit and make a git push
+4. Commit and makes a git push
 5. Open a pull request
 ```
 
