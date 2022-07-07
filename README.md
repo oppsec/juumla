@@ -20,7 +20,7 @@
 
 ## ⚡ Installing / Getting started
 
-<p> A quick guide of how to install and use Juumla. </p>
+<p> A quick guide on how to install and use Juumla. </p>
 
 ```
 1. Clone the repository - git clone https://github.com/oppsec/juumla.git
@@ -31,7 +31,7 @@
 <br>
 
 ### 🐳 Docker
-If you want to run Juumla in a Docker container, follow this commands:
+If you want to run Juumla in a Docker container, follow these commands:
 
 ```
 1. Clone the repository - git clone https://github.com/oppsec/juumla.git
@@ -52,8 +52,8 @@ If you want to run Juumla in a Docker container, follow this commands:
 - Low RAM and CPU usage
 - Detect Joomla version
 - Find config and backup files
-- Scan for vulnerabilities based in Joomla version
-- Totally open-source
+- Scan for vulnerabilities based on the Joomla version
+- Open-Source
 
 <br><br>
 
@@ -66,7 +66,7 @@ If you want to run Juumla in a Docker container, follow this commands:
 
 ### 🔨 Contributing
 
-A quick guide of how to contribute with the project.
+A quick guide on how to contribute to the project.
 
 ```
 1. Create a fork from Juumla repository
