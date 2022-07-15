@@ -62,7 +62,7 @@ If you want to run Juumla in a Docker container, follow these commands:
 ### 📚 To-Do
 - [ ] Update vulnerabilities database
 - [ ] Improve Joomla detection methods
-- [ ] Update code
+- [ ] Improve code optimization
 
 <br><br>
 
