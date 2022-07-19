@@ -1,10 +1,16 @@
-# Install alpine, python3 and pip
-FROM alpine:latest
+FROM python:3.8-slim
 LABEL maintainer="oppsec <https://github.com/oppsec>"
-RUN apk add --no-cache python3 py3-pip
+
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV PIP_NO_CACHE_DIR=off
+
+WORKDIR /juumla
+
+RUN apt-get update && \
+    apt-get install -y openssl python3 git apt-utils
 
 # Create directories
-WORKDIR /juumla
 COPY . .
 
 # Install libraries and run
