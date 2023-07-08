@@ -42,6 +42,18 @@ If you want to run Juumla in a Docker container, follow these commands:
 3. Run container - sudo docker run juumla:latest
 ```
 
+If you want to create an Joomla environment in a Docker container, follow these commands:
+```
+1. Clone the repository - git clone https://github.com/oppsec/juumla.git (or download the docker-compose.yml file)
+2. Install docker-compose (e.g: sudo apt install docker-compose)
+3. sudo docker-compose up
+4. Access http://localhost:8080/
+
+The default root password is: example
+The default database name is: joomladb
+The default DBMS is: MySQL 5.6
+```
+
 <br><br>
 
 ### ⚙️ Pre-requisites
@@ -62,8 +74,8 @@ If you want to run Juumla in a Docker container, follow these commands:
 
 ### 📚 To-Do
 - [ ] Update vulnerabilities database
-- [ ] Improve Joomla detection methods
-- [ ] Improve code optimization
+- [x] Improve Joomla detection methods
+- [x] Improve code optimization
 
 <br><br>
 
