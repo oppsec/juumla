@@ -1,6 +1,6 @@
 from rich import print
 
-def banner() -> str:
+def get_banner() -> str:
     " Return the content from banner.txt file as application banner "
 
     path: str = "src/interface/banner.txt"

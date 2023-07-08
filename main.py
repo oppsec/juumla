@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-from src.interface.ui import banner
-from src.juumla.main import start
+from src.interface.ui import get_banner
+from src.juumla.main import perform_checks
 
 from argparse import ArgumentParser
 
 if __name__ == "__main__":
-    banner()
+    get_banner()
 
-    parser: str = ArgumentParser()
-    parser.add_argument('-u', help='Run Juumla on target', required=True)
-    args: str = parser.parse_args()
+    parser = ArgumentParser()
+    parser.add_argument('-u', help='-u: HTTP(s) target URL to run the scanner', required=True)
+    args = parser.parse_args()
 
-    start(args)
+    perform_checks(args)

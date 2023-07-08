@@ -3,7 +3,7 @@ from rich import print
 
 from src.juumla.modules.files import files_manager
 
-def vuln_manager(args, version) -> None:
+def vuln_manager(url, version) -> None:
     " Search for vulnerabilities on current target Joomla version "
 
     print("\n[cyan]> Running Joomla vulnerabilities scanner... [2/3] [/]")
@@ -14,7 +14,6 @@ def vuln_manager(args, version) -> None:
         content = load(file)
 
         for vuln_title, vuln_version in content.items():
-
             vuln_version = vuln_version.split("|")
             min_version = vuln_version[0]
             max_version = vuln_version[1]
@@ -26,4 +25,4 @@ def vuln_manager(args, version) -> None:
 
 
     print("[yellow]> Vulnerabilities scanner finished [2/3] [/]")
-    files_manager(args)
+    files_manager(url)

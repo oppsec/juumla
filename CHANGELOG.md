@@ -1,3 +1,15 @@
+# 🎉 0.1.5 - 02/06/2022
+- Improved the code
+- Fixed error when trying to get Joomla version on get_version_second() func
+- Improved backup and configuration file scanner module
+- Fixed not initializing/closing rich markup correct on get_version_second() func
+- Improved Exception treatment
+- Added docker-compose.yml file to emulate an Joomla environment to test the tool
+- Fixed get_user_agent() returning byte instead of string
+- Improved random user-agent getter from get_user_agent() func
+
+<br>
+
 # 🎉 0.1.4 - 02/06/2022
 - Improved the code
 - Removed useless checks

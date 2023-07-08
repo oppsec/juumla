@@ -12,12 +12,12 @@ app_xml_header = "application/xml"
 text_xml_header = "text/xml"
 
 
-def get_version(args) -> None:
+def get_version(url: str) -> None:
     " Get Joomla version based on XML files response "
 
     print("\n[cyan]> Running Joomla version scanner... [1/3] [/]")
 
-    xml_file = f"{args.u}/language/en-GB/en-GB.xml"
+    xml_file = f"{url}/language/en-GB/en-GB.xml"
 
     try:
         response: str = get(xml_file, **props)
@@ -28,19 +28,20 @@ def get_version(args) -> None:
             version = data["metafile"]["version"]
 
             print(f"[green]> Joomla version is: {version} [/]")
-            vuln_manager(args, version)
+            vuln_manager(url, version)
         else:
             print("[yellow]> Couldn't get Joomla version, trying other way... [/]")
-            last_version_try(args)
+            get_version_second(url)
 
-    except exceptions as error:
-        return print(f"[red]> Error when trying to get Joomla version: {args.u} | {error} [/]")
+    except Exception as error:
+        print(f"[red]> Error when trying to get Joomla version on {url} | {error} [/]")
+        return True
 
 
-def last_version_try(args) -> None:
+def get_version_second(url) -> None:
     """ Last try to get Joomla version """
 
-    manifest_file = f"{args.u}/administrator/manifests/files/joomla.xml"
+    manifest_file = f"{url}/administrator/manifests/files/joomla.xml"
 
     try:
         response = get(manifest_file, **props)
@@ -48,13 +49,14 @@ def last_version_try(args) -> None:
 
         if response.ok and app_xml_header or text_xml_header in headers:
             data = parse(response.content)
-            version = data["extesion"]["version"]
+            version = data["extension"]["version"]
 
-            print(f"> Joomla version is: {version} [/]")
-            vuln_manager(args, version)
+            print(f"[green]> Joomla version is: {version} [/]")
+            vuln_manager(url, version)
         else:
-            return print("[yellow]> Couldn't get Joomla version, stopping... [/]")
+            print("[yellow]> Couldn't get Joomla version, stopping... [/]")
+            return True
 
-    except exceptions as error:
-        return print(f"[red]> Error when trying to get Joomla version (2): {args.u} | {error} [/]")
-
+    except Exception as error:
+        print(f"[red]> Error: {error} [/]")
+        return True
