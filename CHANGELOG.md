@@ -1,4 +1,4 @@
-# 🎉 0.1.5 - 02/06/2022
+# 🎉 0.1.5 - 08/07/2023
 - Improved the code
 - Fixed error when trying to get Joomla version on get_version_second() func
 - Improved backup and configuration file scanner module
