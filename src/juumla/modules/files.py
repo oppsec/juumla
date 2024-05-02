@@ -9,7 +9,7 @@ def file_scan(file_to_check: str, file_url: str) -> None:
         response = get(f"{file_url}/{file_to_check}", **props)
 
         if response.ok and 'text/html' not in response.headers.get('Content-Type', '').lower():
-            console.print(f"[green][+][/] Sensitive file found: {response.url}", highlight=False)
+            console.print(f"[green][+][/] Sensitive file found: [yellow]{response.url}[/]", highlight=False)
         elif response.ok:
             console.print(f"[yellow][!][/] File is HTML, not a sensitive file: {response.url}", highlight=False)
     
@@ -34,4 +34,4 @@ def files_manager(url) -> None:
     for bkp_file in bkp_files:
         file_scan(bkp_file, url)
 
-    console.print("[yellow][!][/] Backup and config files scanner finished! [cyan](3/3)[/", highlight=False)
+    console.print("[yellow][!][/] Backup and config files scanner finished! [cyan](3/3)[/]", highlight=False)
