@@ -1,5 +1,6 @@
-from rich import print
 from requests import get, exceptions
+from rich.console import Console
+console = Console()
 
 from src.juumla.settings import props
 
@@ -7,17 +8,19 @@ def file_scan(file_to_check: str, file_url: str) -> None:
     try:
         response = get(f"{file_url}/{file_to_check}", **props)
 
-        if response.ok:
-            print(f"[green]> Sensitive file found: {response.url} [/]")
+        if response.ok and 'text/html' not in response.headers.get('Content-Type', '').lower():
+            console.print(f"[green][+][/] Sensitive file found: {response.url}", highlight=False)
+        elif response.ok:
+            console.print(f"[yellow][!][/] File is HTML, not a sensitive file: {response.url}", highlight=False)
     
     except Exception as error:
-        print(f"[red]> Error when trying to find sensitive files: {error} [/]")
+        console.print(f"[red][-][/] Error when trying to find sensitive files: {error}", highlight=False)
 
 
 def files_manager(url) -> None:
     " Search for sensitive readable backup or config files on target "
 
-    print("\n[cyan]> Running backup and config files scanner... [3/3] [/]")
+    console.print("\n[yellow][!][/] Running backup and config files scanner! [cyan](3/3)[/]", highlight=False)
 
     config_files = ['configuration.php~','configuration.php.new','configuration.php.new~','configuration.php.old','configuration.php.old~','configuration.bak','configuration.php.bak','configuration.php.bkp','configuration.txt','configuration.php.txt','configuration - Copy.php','configuration.php.swo','configuration.php_bak','configuration.orig','configuration.php.save','configuration.php.original','configuration.php.swp','configuration.save','.configuration.php.swp','configuration.php1','configuration.php2','configuration.php3','configuration.php4','configuration.php4','configuration.php6','configuration.php7','configuration.phtml','configuration.php-dist']
 
@@ -31,4 +34,4 @@ def files_manager(url) -> None:
     for bkp_file in bkp_files:
         file_scan(bkp_file, url)
 
-    print("[yellow]> Config and backup files scanner finished [3/3] [/]")
+    console.print("[yellow][!][/] Backup and config files scanner finished! [cyan](3/3)[/", highlight=False)

@@ -1,14 +1,17 @@
 from requests import get, exceptions
-from rich import print
+
+from rich.console import Console
+console = Console()
+
 from urllib3 import disable_warnings
+disable_warnings()
+
 from src.juumla.settings import props
 from src.juumla.modules.version import get_version
 
-disable_warnings()
-
 
 def perform_checks(args) -> None:
-    " Try to connect to the host and check status code condition "
+    " Connect to the target and check if status code is positive "
 
     global url
     url = args.u
@@ -18,24 +21,25 @@ def perform_checks(args) -> None:
         status_code: int = response.status_code
         body: str = response.text
 
-        status_error = f"[bold white on red]> Host returned status code: {status_code}"
-
         if response.ok:
+            console.print(f"[green][+][/] Connected successfully to [yellow]{url}[/]", highlight=False)
             detect_joomla(body)
         else:
-            return print(status_error)
+            console.print(f"[red][-][/] Host returned status code: {status_code}", highlight=False)
+            return
 
     except exceptions as error:
-        return print(f"[red]> Error when trying to connect to host: {url} | {error} [/]")
+        console.print(f"[red][-][/] Error when trying to connect to {url}: {error}", highlight=False)
+        return
 
 
 def detect_joomla(body) -> None:
-    " Detect Joomla with body response "
+    " Check if meta tag 'generator' contains Joomla! in body response "
 
-    print("[yellow]> Checking if target is running Joomla... [/]")
+    console.print("[yellow][!][/] Checking if target is running Joomla...", highlight=False)
 
     if '<meta name="generator" content="Joomla!' in body: 
         get_version(url)
     else:
-        print("[red][-] Target is not running Joomla apparently [/]")
-        return True
+        console.print("[red][-][/] Target is not running Joomla apparently")
+        return

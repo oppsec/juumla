@@ -1,3 +1,11 @@
+# 🎉 0.1.6 - 02/05/2024
+- Added check to config and backup files scanner if result is not HTML response
+- Changed print to console.print from rich
+- Changed interface
+- Improved the code
+
+<br><br>
+
 # 🎉 0.1.5 - 08/07/2023
 - Improved the code
 - Fixed error when trying to get Joomla version on get_version_second() func
@@ -8,7 +16,7 @@
 - Fixed get_user_agent() returning byte instead of string
 - Improved random user-agent getter from get_user_agent() func
 
-<br>
+<br><br>
 
 # 🎉 0.1.4 - 02/06/2022
 - Improved the code
@@ -16,13 +24,13 @@
 - Changed Juumla banner
 - Changed status messages
 
-<br>
+<br><br>
 
 # 🎉 0.1.3b - 12/01/2022
 - Updated libraries version
 - Improved the code a bit
 
-<br>
+<br><br>
 
 # 🎉 0.1.2a - 27/09/2021
 - Made functions description more readable
@@ -30,7 +38,7 @@
 - Changed some messages to something like: "Oh I got that"
 - Added more tags to requests headers
 
-<br>
+<br><br>
 
 # 🎉 0.1.2 - 08/09/2021
 - Removed automatic screen clear

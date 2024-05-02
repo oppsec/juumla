@@ -1,12 +1,14 @@
 from requests import get, exceptions
-from urllib3 import disable_warnings
 from xmltodict import parse, expat
-from rich import print
+
+from rich.console import Console
+console = Console()
+
+from urllib3 import disable_warnings
+disable_warnings()
 
 from src.juumla.settings import props
 from src.juumla.modules.vulns import vuln_manager
-
-disable_warnings()
 
 app_xml_header = "application/xml"
 text_xml_header = "text/xml"
@@ -15,11 +17,10 @@ text_xml_header = "text/xml"
 def get_version(url: str) -> None:
     " Get Joomla version based on XML files response "
 
-    print("\n[cyan]> Running Joomla version scanner... [1/3] [/]")
-
-    xml_file = f"{url}/language/en-GB/en-GB.xml"
+    console.print("\n[yellow][!][/] Running Joomla version scanner! [cyan](1/3)[/]", highlight=False)
 
     try:
+        xml_file = f"{url}/language/en-GB/en-GB.xml"
         response: str = get(xml_file, **props)
         headers: str = response.headers
 
@@ -27,15 +28,15 @@ def get_version(url: str) -> None:
             data = parse(response.content)
             version = data["metafile"]["version"]
 
-            print(f"[green]> Joomla version is: {version} [/]")
+            console.print(f"[green][+][/] Joomla version is: {version}", highlight=False)
             vuln_manager(url, version)
         else:
-            print("[yellow]> Couldn't get Joomla version, trying other way... [/]")
+            console.print("[yellow][!][/] Couldn't get Joomla version, trying other way...", highlight=False)
             get_version_second(url)
 
     except Exception as error:
-        print(f"[red]> Error when trying to get Joomla version on {url} | {error} [/]")
-        return True
+        console.print(f"[red][-][/] Error when trying to get {url} Joomla version in first method: {error}", highlight=False)
+        return
 
 
 def get_version_second(url) -> None:
@@ -51,12 +52,12 @@ def get_version_second(url) -> None:
             data = parse(response.content)
             version = data["extension"]["version"]
 
-            print(f"[green]> Joomla version is: {version} [/]")
+            console.print(f"[green][+][/] Joomla version is: {version}", highlight=False)
             vuln_manager(url, version)
         else:
-            print("[yellow]> Couldn't get Joomla version, stopping... [/]")
-            return True
+            console.print("[red][-][/] Couldn't get Joomla version, stopping...", highlight=False)
+            return
 
     except Exception as error:
-        print(f"[red]> Error: {error} [/]")
-        return True
+        console.print(f"[red][-][/] Error when trying to get {url} Joomla version in second method: {error}", highlight=False)
+        return
